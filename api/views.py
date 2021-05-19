@@ -20,16 +20,15 @@ def getHeadScrips(request):
     Response status : 1 indicates Success,
                     : 0 indictes Error
     '''
-    response={}
+    result={}
     all_scrips = redis_instance.keys("*")
     for scrip_name in all_scrips[:10]:
         stored_data = redis_instance.lrange(scrip_name,0,redis_instance.llen(scrip_name))
-        for data in stored_data:
-            if scrip_name.decode("utf-8") in response.keys():
-                response[scrip_name.decode("utf-8")].append(json.loads(data))
-            else:
-                response[scrip_name.decode("utf-8")] = [json.loads(data)]
-    response["status"] = 1
+        result[scrip_name.decode("utf-8")] = json.loads(stored_data[0])
+    response = {
+                "status": 1,
+                "result":result
+    }
     return Response(response, status = 200)
 
 @api_view(["GET"])
@@ -41,15 +40,18 @@ def searchScrip(request, scrip_name):
     Response status : 1 indicates Success,
                     : 0 indictes Error
     '''
-    response = {}
+    result = {}
     stored_data = redis_instance.lrange(scrip_name,0,redis_instance.llen(scrip_name))
     if not len(stored_data):
         return Response({
                          "status":"0", # O status indictes error
                          "message":"Scrip Name Does Not Exist"
         })
-    response[scrip_name] = []
+    result[scrip_name] = []
     for data in stored_data:
-        response[scrip_name].append(json.loads(data))
-    response["status"] = 1
+        result[scrip_name].append(json.loads(data))
+    response = {
+            "status": 1,
+            "result":result
+    }
     return Response(response, status = 200)
