@@ -22,12 +22,14 @@ def getHeadScrips(request):
     '''
     result={}
     all_scrips = redis_instance.keys("*")
+    scrip_keys = [name.decode('utf-8') for name in all_scrips]
     for scrip_name in all_scrips[:10]:
         stored_data = redis_instance.lrange(scrip_name,0,redis_instance.llen(scrip_name))
         result[scrip_name.decode("utf-8")] = json.loads(stored_data[0])
     response = {
                 "status": 1,
-                "result":result
+                "result":result,
+                "scrip_keys":scrip_keys
     }
     return Response(response, status = 200)
 
