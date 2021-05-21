@@ -22,6 +22,7 @@ Write a standalone Python Django web app/server that:
 <li> Clone this repository </li>
 <li> Install packages from "requirements.txt"</li>
 <li> Install Redis and set REDIS_HOST and REDIS_PORT in settings.py </li>
+<li>Set "IS_PRODUCTION" environment variable to True of False</li> 
 <li> Run the following command and then add the same to <I>Crontab</I> : "python manage.py getBhavCopy" </li>
 <li> Run Django server  </li>
 </ul>
