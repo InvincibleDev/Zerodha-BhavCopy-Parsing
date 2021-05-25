@@ -27,6 +27,5 @@ Write a standalone Python Django web app/server that:
 <li> Run Django server  </li>
 </ul>
 
-#### Demo Link : <a href="http://zerodha-bhav-copy.s3-website.ap-south-1.amazonaws.com/" target="_blank" > Click Here</a>
 
 #### Link for Frontend Repo : <a href="https://github.com/InvincibleDev/Zerodha-BhavCopy-Frontend" target="_blank" > Click Here</a>
